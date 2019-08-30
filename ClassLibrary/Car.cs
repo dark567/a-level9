@@ -8,19 +8,21 @@ namespace ClassLibrary
 {
     public class Car
     {
-        private int discount = 0;
+        
 
         public Guid Id { get; set; }
         public string Type { get; set; }
         public string Color { get; set; }
-
         public decimal Price { get; set; }
 
-        public static List<Car> _modelCar;
+        private int discount = 0;
 
-        public Car()
+        public static List<Car> _ModelCar;
+
+
+        static Car()
         {
-            _modelCar = new List<Car>();
+            _ModelCar = new List<Car>();
         }
 
         public Car(string Type = "n/a", string Color = "n/a", decimal Price = 0)
@@ -31,20 +33,6 @@ namespace ClassLibrary
             this.Price = Price;
 
         }
-
-        public static Car[] GetCar
-        {
-            get
-            {
-                return _modelCar.ToArray();
-            }
-        }
-
-        public static void ShowCar(Car car)
-        {
-            Console.WriteLine(car.Type);
-        }
-
 
         public int Discount
         {

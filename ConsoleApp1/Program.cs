@@ -17,6 +17,7 @@ namespace ConsoleApp1
             int ChoiceNomMenu = 0;
 
             AddCarList();
+
             ShowMenuInConsole();
             while (!MQuit)
             {
@@ -33,7 +34,7 @@ namespace ConsoleApp1
                 {
                     case 1: //Show ALL
 
-                        foreach (Car spw in Car.GetCar)
+                        foreach (Car spw in CarLogic.GetCar)
                         {
                             Console.WriteLine($" {spw.Id} \t {spw.Type} \t {spw.Color} \t {spw.Price} ");
                         }
@@ -42,7 +43,15 @@ namespace ConsoleApp1
                         break;
                     case 2: //Show ALL
 
-
+                        try
+                        {
+                            addNewCar();
+                            Console.WriteLine("\t Item added successfully.");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("\tError. Something went wrong!)", e.Message);
+                        }
 
                         ShowMenuInConsole();
 
@@ -66,11 +75,46 @@ namespace ConsoleApp1
             Console.WriteLine("\t [3] Exit the program");
         }
 
+
         static void AddCarList()
         {
-            CarLogic.AddCar("Vaz", "Red", 0);
-            CarLogic.AddCar("Vaz", "Red", 0);
-            CarLogic.AddCar("Vaz", "Red", 0);
+            CarLogic.AddCar(new Car("Vaz", "Red", 0));
+            CarLogic.AddCar(new Car("Vaz", "Green", 0));
+            CarLogic.AddCar(new Car("Vaz", "Black", 0));
+        }
+
+        private static void addNewCar()
+        {
+            try
+            {
+                string Type, Color;
+                decimal Price;
+
+                Console.Write("\t Write Type Car:");
+                Type = Console.ReadLine();
+
+                Console.Write("\t Write Collor Car:");
+                Color = Console.ReadLine();
+
+                bool pr = false;
+                do
+                {
+                    Console.Write("\t Write Price Car:");
+                    pr = decimal.TryParse(Console.ReadLine(), out Price);
+                    if (Price <= 0) pr = false;
+
+                } while (!pr);
+
+
+                CarLogic.AddCar(new Car(Type, Color, Price));
+
+                Console.WriteLine("\tSuccessfully");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\tError. Something went wrong!)", e.Message);
+            }
+
         }
     }
 }

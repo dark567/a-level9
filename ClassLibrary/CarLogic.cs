@@ -4,18 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ClassLibrary
 {
     public static class CarLogic
     {
-        public static void AddCar(string Type, string Color, decimal Price)
+
+
+        public static Car[] GetCar
         {
-            Car car = new Car(Type, Color, Price);
+            get
+            {
+                return Car._ModelCar.ToArray();
+            }
         }
 
-
-      
-
+        public static void AddCar(Car _modelCar)
+        {
+            Car._ModelCar.Add(_modelCar);
+        }
 
 
     }
